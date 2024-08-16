@@ -1,0 +1,96 @@
+.App {
+  text-align: left;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.chatbox {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 600px;
+  height: 800px;
+  border: 5px solid #a67e7e;
+  background-color: #553a3a;
+  border-radius: 15px;
+}
+
+.messages-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px;
+  list-style-type: none;
+}
+
+.messages-list li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+  font-size: 16px;
+  color: #000000;
+}
+
+.user-msg {
+  background-color: #b39e9b;
+  align-self: flex-end;
+}
+
+.ai-msg {
+  background-color: #ffffff;
+  align-self: flex-start;
+}
+
+.input-area {
+  display: flex;
+  padding: 10px;
+  position: relative;
+}
+
+.input-area button {
+  border: 1px;
+  padding: 6px;
+}
+
+.input-area input[type="file"] {
+  display: none;
+}
+
+.emoji-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px; 
+  border-radius: 8px 0 0 8px;
+}
+
+.attachment-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.attachment-button svg {
+  padding: 6px;
+}
+
+.send-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 0px 12px 8px 0px;
+}
+
+.editable-input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid gray;
+  color: white;
+}
+
+.emoji-img {
+  height: 16px;
+  vertical-align: middle;
+}
