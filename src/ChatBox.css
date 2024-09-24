@@ -4,15 +4,22 @@
   margin-left: 20px;
 }
 
+.App-logo {
+  width: 50vmin;
+  height: auto;
+}
+
 .chatbox {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 600px;
-  height: 800px;
-  border: 5px solid #a67e7e;
+  width: 500px;
+  height: 500px;
+  border: 2px solid #a67e7e;
   background-color: #553a3a;
   border-radius: 15px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .messages-list {
@@ -20,15 +27,20 @@
   overflow-y: auto;
   padding: 10px;
   list-style-type: none;
+  box-sizing: border-box; /* Ensures padding and border don't cause overflow */
+  max-width: 100%;
+  max-height: 100%; /* Keeps the messages inside the box */
 }
 
 .messages-list li {
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 5px;
   border-radius: 10px;
-  max-width: 80%;
   font-size: 16px;
   color: #000000;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 93%;
 }
 
 .user-msg {
@@ -37,14 +49,8 @@
 }
 
 .ai-msg {
-  background-color: #ffffff;
+  background-color: #eee9e9;
   align-self: flex-start;
-}
-
-.input-area {
-  display: flex;
-  padding: 10px;
-  position: relative;
 }
 
 .input-area button {
@@ -56,41 +62,63 @@
   display: none;
 }
 
-.emoji-button {
-  display: flex;
+.input-area {
   align-items: center;
-  justify-content: center;
-  font-size: 26px; 
-  border-radius: 8px 0 0 8px;
-}
-
-.attachment-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.attachment-button svg {
-  padding: 6px;
-}
-
-.send-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  border-radius: 0px 12px 8px 0px;
+  position: relative;
+  border: 1px solid gray;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
 }
 
 .editable-input {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border: 1px solid gray;
+  flex-grow: 1;
+  margin-right: 60px;
+  outline: none;
+  padding: 5px;
+  border: none;
+  overflow-y: auto;  /* Enable scroll when content exceeds the height */
+  max-height: 120px;  /* Adjust based on your font size, this is for 6 lines */
+  line-height: 20px;  /* Approximate line height */
+}
+.send-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background-color: #741214;
+  border: none;
   color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.emoji-img {
-  height: 16px;
-  vertical-align: middle;
+.send-button:hover {
+  background-color: #000701;
+}
+
+@media (max-width: 550px) {
+  .chatbox {
+    width: 90vw;
+    padding: 5px;
+  }
+  .messages-list li {
+    font-size: 14px;
+    max-width: 93%;
+  }
+}
+
+@media (max-height: 550px) {
+  .chatbox {
+    min-height: 300px;
+    height: 90vh;
+    width: 90vw;
+    padding: 5px;
+    max-width:500px;
+  }
+  .messages-list li {
+    font-size: 14px;
+    max-width: 93%;
+  }
 }
