@@ -82,12 +82,17 @@ function ChatBox() {
     const sanitizedInput = DOMPurify.sanitize(textContent);
     console.log("Sending:", sanitizedInput);
 
-    try {
-      const response = await fetch('http://localhost:5000/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: sanitizedInput })
-      });
+    const baseURL = process.env.NODE_ENV === 'development'
+    ? process.env.REACT_APP_LOCAL_BACKEND_URL
+    : process.env.REACT_APP_PRODUCTION_BACKEND_URL;
+  
+  try {
+    const response = await fetch(`${baseURL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: sanitizedInput })
+    });
+  
 
       if (response.ok) {
         const responseData = await response.json();
