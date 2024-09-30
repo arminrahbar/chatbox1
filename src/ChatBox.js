@@ -83,8 +83,8 @@ function ChatBox() {
     console.log("Sending:", sanitizedInput);
 
     const baseURL = process.env.NODE_ENV === 'development'
-    ? process.env.REACT_APP_LOCAL_BACKEND_URL
-    : process.env.REACT_APP_PRODUCTION_BACKEND_URL;
+    ? 'http://localhost:8080' // Local backend URL when in development
+    : 'https://chatbox-env.eba-mxm4ybqz.us-east-1.elasticbeanstalk.com';
   
   try {
     const response = await fetch(`${baseURL}/chat`, {
@@ -93,7 +93,6 @@ function ChatBox() {
       body: JSON.stringify({ message: sanitizedInput })
     });
   
-
       if (response.ok) {
         const responseData = await response.json();
         console.log("Full response data:", JSON.stringify(responseData, null, 2));

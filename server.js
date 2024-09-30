@@ -7,14 +7,6 @@ dotenv.config();
 
 const app = express();
 
-// Force HTTPS in production if the FORCE_HTTPS variable is set to 'true'
-app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production' && process.env.FORCE_HTTPS === 'true' && req.headers['x-forwarded-proto'] !== 'https') {
-    return res.redirect(`https://${req.headers.host}${req.url}`);
-  }
-  next();
-});
-
 // CORS configuration to allow GitHub Pages and localhost
 const corsOptions = {
   origin: function (origin, callback) {
