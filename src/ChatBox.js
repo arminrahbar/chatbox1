@@ -84,7 +84,7 @@ function ChatBox() {
 
     const baseURL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:8080' // Local backend URL when in development
-    : 'https://chatbox.arminrabar.com/chat';
+    : 'https://chatbox.arminrabar.com';
   
   try {
     const response = await fetch(`${baseURL}/chat`, {
