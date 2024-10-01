@@ -7,17 +7,22 @@ dotenv.config();
 
 const app = express();
 
-// CORS configuration to allow GitHub Pages and localhost
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow localhost in development
     if (process.env.NODE_ENV === 'development') {
-      callback(null, 'http://localhost:3000'); // Local React frontend running on localhost
+      callback(null, 'http://localhost:3000'); // Allow local development
     } else {
-      // Allow requests from GitHub Pages in production
-      if (origin === 'https://arminrahbar.github.io' || origin === 'https://arminrahbar.github.io/chatbox1/') {
-        callback(null, true); // Allow GitHub Pages
+      // Allow both GitHub Pages and your custom domain in production
+      const allowedOrigins = [
+        'https://arminrahbar.github.io',
+        'https://arminrahbar.github.io/chatbox1/',
+        'https://chatbox.arminrabar.com'
+      ];
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow these origins
       } else {
+        console.log(`CORS request from disallowed origin: ${origin}`);
         callback(new Error('Not allowed by CORS'));
       }
     }
@@ -33,10 +38,17 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 8080;
 
+// OpenAI client setup
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+// Dedicated health check route
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'Healthy' });
+});
+
+// Chat route to handle OpenAI interactions
 app.post('/chat', async (req, res) => {
   const { message } = req.body;
   console.log("Received message:", message);
@@ -62,6 +74,7 @@ app.post('/chat', async (req, res) => {
   }
 });
 
+// Start the server on HTTPS port
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
